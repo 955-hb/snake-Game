@@ -15,22 +15,19 @@ let direction = "LEFT";
 
 draw();
 function draw() {
-  ctx.fillStyle = "lightsalmon";
+  ctx.fillStyle = "black";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-  ctx.fillStyle = "gray";
-  add(100, 150);
-  add(130, 150);
-  add(160, 150);
-  add(190, 150);
-  add(220, 150);
+  ctx.fillStyle = "white";
 
-  ctx.fillStyle = "lightgreen";
-  add(290, 250);
+  snake.forEach((part) => add(part.x, part.y));
+
+  ctx.fillStyle = "yellow";
+  add(food.x, food.y); // Food
 }
 
 function add(x, y) {
-  ctx.fillRect(x, y, 30 - 1, 30 - 1);
+  ctx.fillRect(x * cellWidth, y * cellHeight, cellWidth - 1, cellHeight - 1);
 }
 
 function gameLoop() {}
