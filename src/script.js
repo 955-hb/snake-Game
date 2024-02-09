@@ -1,17 +1,15 @@
 let canvas = document.getElementById("canvas");
 let ctx = canvas.getContext("2d");
 
-let rows = 10;
-let cols = 10;
-let snake = [
-  { x: 2, y: 3 },
-  { x: 3, y: 3 },
-  { x: 4, y: 3 },
-];
-let food = { x: 5, y: 5 };
+let rows = 20;
+let cols = 20;
+let snake = [{ x: 19, y: 3 }];
+let food = { x: 4, y: 5 };
 let cellWidth = canvas.width / cols;
 let cellHeight = canvas.height / rows;
 let direction = "LEFT";
+
+setInterval(gameLoop, 500);
 
 draw();
 function draw() {
@@ -24,10 +22,14 @@ function draw() {
 
   ctx.fillStyle = "yellow";
   add(food.x, food.y); // Food
+
+  requestAnimationFrame(draw);
 }
 
 function add(x, y) {
   ctx.fillRect(x * cellWidth, y * cellHeight, cellWidth - 1, cellHeight - 1);
 }
 
-function gameLoop() {}
+function gameLoop() {
+  snake[0].x--;
+}
