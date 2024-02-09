@@ -10,6 +10,7 @@ let cellHeight = canvas.height / rows;
 let direction = "LEFT";
 
 setInterval(gameLoop, 500);
+document.addEventListener("keydown", keyDown);
 
 draw();
 function draw() {
@@ -31,5 +32,31 @@ function add(x, y) {
 }
 
 function gameLoop() {
-  snake[0].x--;
+  if (direction == "LEFT") {
+    snake[0].x--;
+  }
+  if (direction == "RIGHT") {
+    snake[0].x++;
+  }
+  if (direction == "UP") {
+    snake[0].y--;
+  }
+  if (direction == "DOWN") {
+    snake[0].y++;
+  }
+}
+
+function keyDown(e) {
+  if (e.keyCode == 37) {
+    direction = "LEFT";
+  }
+  if (e.keyCode == 38) {
+    direction = "UP";
+  }
+  if (e.keyCode == 39) {
+    direction = "RIGHT";
+  }
+  if (e.keyCode == 40) {
+    direction = "DOWN";
+  }
 }
