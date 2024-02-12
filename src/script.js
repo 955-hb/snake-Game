@@ -29,6 +29,27 @@ function draw() {
   requestAnimationFrame(draw);
 }
 
+function testGmeOver() {
+  let firstPart = snake[0];
+  let otherParts = snake.slice(1);
+  let duplicatePart = otherParts.find(
+    (part) => part.x == firstPart.x && part.y == firstPart.y
+  );
+
+  //1. snake gegen wand
+  if (
+    snake[0].x < 0 ||
+    snake[0].x > cols - 1 ||
+    snake[0].y < 0 ||
+    snake[0].y > rows - 1 ||
+    duplicatePart
+  ) {
+    placeFood();
+    snake = [{ x: 19, y: 3 }];
+    direction = "LEFT";
+  }
+}
+
 function add(x, y) {
   ctx.fillRect(x * cellWidth, y * cellHeight, cellWidth - 1, cellHeight - 1);
 }
@@ -43,6 +64,7 @@ function shiftSnake() {
 }
 
 function gameLoop() {
+  testGmeOver();
   if (foodCollected) {
     snake = [
       {
