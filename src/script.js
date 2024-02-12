@@ -8,6 +8,7 @@ let food;
 let cellWidth = canvas.width / cols;
 let cellHeight = canvas.height / rows;
 let direction = "LEFT";
+let foodCollected = false;
 
 placeFood();
 setInterval(gameLoop, 500);
@@ -33,6 +34,17 @@ function add(x, y) {
 }
 
 function gameLoop() {
+  if (foodCollected) {
+    snake = [
+      {
+        x: snake[0].x,
+        y: snake[0].y,
+      },
+      ...snake,
+    ];
+    foodCollected = false;
+  }
+
   if (direction == "LEFT") {
     snake[0].x--;
   }
@@ -44,6 +56,12 @@ function gameLoop() {
   }
   if (direction == "DOWN") {
     snake[0].y++;
+  }
+
+  if (snake[0].x == food.x && snake[0].y == food.y) {
+    // Futter einsammeln ---> Snake muss wachsen
+    foodCollected = true;
+    placeFood();
   }
 }
 
