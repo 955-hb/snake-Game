@@ -4,11 +4,12 @@ let ctx = canvas.getContext("2d");
 let rows = 20;
 let cols = 20;
 let snake = [{ x: 19, y: 3 }];
-let food = { x: 4, y: 5 };
+let food;
 let cellWidth = canvas.width / cols;
 let cellHeight = canvas.height / rows;
 let direction = "LEFT";
 
+placeFood();
 setInterval(gameLoop, 500);
 document.addEventListener("keydown", keyDown);
 
@@ -59,4 +60,14 @@ function keyDown(e) {
   if (e.keyCode == 40) {
     direction = "DOWN";
   }
+}
+
+function placeFood() {
+  let randomX = Math.floor(Math.random() * cols);
+  let randomY = Math.floor(Math.random() * rows);
+
+  food = {
+    x: randomX,
+    y: randomY,
+  };
 }
