@@ -11,7 +11,7 @@ let direction = "LEFT";
 let foodCollected = false;
 
 placeFood();
-setInterval(gameLoop, 500);
+setInterval(gameLoop, 200);
 document.addEventListener("keydown", keyDown);
 
 draw();
@@ -33,6 +33,15 @@ function add(x, y) {
   ctx.fillRect(x * cellWidth, y * cellHeight, cellWidth - 1, cellHeight - 1);
 }
 
+function shiftSnake() {
+  for (let i = snake.length - 1; i > 0; i--) {
+    const part = snake[i];
+    const lastPart = snake[i - 1];
+    part.x = lastPart.x;
+    part.y = lastPart.y;
+  }
+}
+
 function gameLoop() {
   if (foodCollected) {
     snake = [
@@ -44,6 +53,8 @@ function gameLoop() {
     ];
     foodCollected = false;
   }
+
+  shiftSnake();
 
   if (direction == "LEFT") {
     snake[0].x--;
